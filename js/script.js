@@ -1207,7 +1207,6 @@ Trimakasih`
       if (verifyOrderAccess(data)) {
         try {
           if (shouldRedirectVip(data)) {
-            window.location.href = 'vipacc';
             return;
           }
         } catch (e) {
@@ -1312,7 +1311,6 @@ Trimakasih`
                 verifyMsg.textContent = "Akses VIP terdeteksi, mengalihkan ke VIP...";
                 verifyMsg.className = "p-3 rounded-lg text-xs font-medium text-center bg-green-100 text-green-700 animate-pulse block mb-4";
                 verifyMsg.classList.remove('hidden');
-                window.location.href = 'vipacc';
                 return;
               }
             } catch (e) {
@@ -1676,7 +1674,7 @@ Trimakasih`
   };
   const provinceList = ["Aceh", "Bali", "Banten", "Bengkulu", "DI Yogyakarta", "DKI Jakarta", "Gorontalo", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kep. Bangka Belitung", "Kep. Riau", "Lampung", "Maluku", "Maluku Utara", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat", "Sumatera Selatan", "Sumatera Utara"];
   const chatSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@d538946ef79c0f6b5c4d7471915443ac65eab931/assets/chat.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@81b8454c1c4d9eb45f2d56c9290bdd2a07b6fced/assets/chat.mp3'],
     volume: 1,
     preload: true
   });
@@ -1758,7 +1756,7 @@ Trimakasih`
     }
   });
   const backgroundMusic = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@d538946ef79c0f6b5c4d7471915443ac65eab931/assets/music.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@81b8454c1c4d9eb45f2d56c9290bdd2a07b6fced/assets/music.mp3'],
     volume: 1,
     loop: true,
     html5: true,
@@ -1795,22 +1793,22 @@ Trimakasih`
   }
   Howler.html5PoolSize = 50;
   const hoverSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@d538946ef79c0f6b5c4d7471915443ac65eab931/assets/hover.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@81b8454c1c4d9eb45f2d56c9290bdd2a07b6fced/assets/hover.mp3'],
     volume: 0.6,
     preload: true
   });
   const clickSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@d538946ef79c0f6b5c4d7471915443ac65eab931/assets/click.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@81b8454c1c4d9eb45f2d56c9290bdd2a07b6fced/assets/click.mp3'],
     volume: 1,
     preload: true
   });
   const doneSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@d538946ef79c0f6b5c4d7471915443ac65eab931/assets/done.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@81b8454c1c4d9eb45f2d56c9290bdd2a07b6fced/assets/done.mp3'],
     volume: 1,
     preload: true
   });
   const errorSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@d538946ef79c0f6b5c4d7471915443ac65eab931/assets/error.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@81b8454c1c4d9eb45f2d56c9290bdd2a07b6fced/assets/error.mp3'],
     volume: 1,
     preload: true
   });
@@ -3224,7 +3222,7 @@ Trimakasih`
   const footerTextEl = document.getElementById('footer-text');
   if (footerTextEl) {
     const appVariant = document.body?.dataset?.app;
-    const logoImg = '<img src="https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@d538946ef79c0f6b5c4d7471915443ac65eab931/assets/sflogo.png" class="w-3 h-3 inline-block mr-1 align-middle" alt="Logo">';
+    const logoImg = '<img src="https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@81b8454c1c4d9eb45f2d56c9290bdd2a07b6fced/assets/sflogo.png" class="w-3 h-3 inline-block mr-1 align-middle" alt="Logo">';
     if (appVariant === 'vip') {
       footerTextEl.innerHTML = `${logoImg} 2026. Sulap Foto 5.0 <span class="inline-flex items-center gap-1 bg-gradient-to-tr from-amber-400 to-yellow-200 text-amber-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.35)] tracking-wider border border-yellow-400/30 align-middle">VIP</span> By It's Me`;
     } else {
@@ -3241,8 +3239,8 @@ Trimakasih`
     const rmpVolume = document.getElementById('rmp-volume');
     const rmpToggle = document.getElementById('rmp-toggle');
     const tracks = [
-      {title: 'Penuh Berkah', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@d538946ef79c0f6b5c4d7471915443ac65eab931/assets/Penuh Berkah.mp3'},
-      {title: 'Ramadhan Cuan', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@d538946ef79c0f6b5c4d7471915443ac65eab931/assets/Ramadhan Cuan.mp3'}
+      {title: 'Penuh Berkah', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@81b8454c1c4d9eb45f2d56c9290bdd2a07b6fced/assets/Penuh Berkah.mp3'},
+      {title: 'Ramadhan Cuan', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@81b8454c1c4d9eb45f2d56c9290bdd2a07b6fced/assets/Ramadhan Cuan.mp3'}
     ];
     let currentIndex = 0;
     let hasAutoPlayed = false;
@@ -3919,7 +3917,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(fallbackShow, 400);
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@d538946ef79c0f6b5c4d7471915443ac65eab931/assets/sw.js').catch(() => {
+      navigator.serviceWorker.register('https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@81b8454c1c4d9eb45f2d56c9290bdd2a07b6fced/assets/sw.js').catch(() => {
       });
     });
   }
