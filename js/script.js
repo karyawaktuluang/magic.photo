@@ -257,7 +257,7 @@ if (window.MODE_ENDPOINT === 'GEMINI' && typeof window.fetch === 'function') {
         });
       };
       console.log(init, body)
-      if (url.includes('/generate')) {
+      if (url.includes('generate')) {
         const parts = [{text: body.instruction ?? body.prompt}];
         for (const image of Array.isArray(body.images ?? []) ? body.images ?? [] : [body.images,]) {
           parts.push({inlineData: {mimeType: image.type, data: await fileToBase64(image)}});
@@ -313,7 +313,7 @@ if (window.MODE_ENDPOINT === 'GEMINI' && typeof window.fetch === 'function') {
           return result;
         };
         return response;
-      } else if (url.includes('/chat')) {
+      } else if (url.includes('chat')) {
         const payload = {
           contents: [{parts: [{text: body.prompt}]}],
           systemInstruction: {parts: [/*{text: body.systemPrompt, }*/]}
