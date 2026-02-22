@@ -1698,7 +1698,7 @@ Trimakasih`
   };
   const provinceList = ["Aceh", "Bali", "Banten", "Bengkulu", "DI Yogyakarta", "DKI Jakarta", "Gorontalo", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kep. Bangka Belitung", "Kep. Riau", "Lampung", "Maluku", "Maluku Utara", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat", "Sumatera Selatan", "Sumatera Utara"];
   const chatSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/chat.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/chat.mp3'],
     volume: 1,
     preload: true
   });
@@ -1780,7 +1780,7 @@ Trimakasih`
     }
   });
   const backgroundMusic = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/music.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/music.mp3'],
     volume: 1,
     loop: true,
     html5: true,
@@ -1817,22 +1817,22 @@ Trimakasih`
   }
   Howler.html5PoolSize = 50;
   const hoverSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/hover.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/hover.mp3'],
     volume: 0.6,
     preload: true
   });
   const clickSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/click.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/click.mp3'],
     volume: 1,
     preload: true
   });
   const doneSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/done.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/done.mp3'],
     volume: 1,
     preload: true
   });
   const errorSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/error.mp3'],
+    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/error.mp3'],
     volume: 1,
     preload: true
   });
@@ -3246,7 +3246,7 @@ Trimakasih`
   const footerTextEl = document.getElementById('footer-text');
   if (footerTextEl) {
     const appVariant = document.body?.dataset?.app;
-    const logoImg = '<img src="https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/sflogo.png" class="w-3 h-3 inline-block mr-1 align-middle" alt="Logo">';
+    const logoImg = '<img src="https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/sflogo.png" class="w-3 h-3 inline-block mr-1 align-middle" alt="Logo">';
     if (appVariant === 'vip') {
       footerTextEl.innerHTML = `${logoImg} 2026. Sulap Foto 5.0 <span class="inline-flex items-center gap-1 bg-gradient-to-tr from-amber-400 to-yellow-200 text-amber-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.35)] tracking-wider border border-yellow-400/30 align-middle">VIP</span> By It's Me`;
     } else {
@@ -3263,11 +3263,11 @@ Trimakasih`
     const rmpVolume = document.getElementById('rmp-volume');
     const rmpToggle = document.getElementById('rmp-toggle');
     const tracks = [
-      {title: 'Surah Ar Rahman', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/055 Ar Rahman.mp3'},
-      {title: 'Penuh Berkah', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/Penuh Berkah.mp3'},
-      {title: 'Surah Yusuf', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/012 Yusuf.mp3'},
-      {title: 'Ramadhan Cuan', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/Ramadhan Cuan.mp3'},
-      {title: 'Surah An Nisa', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/004 An Nisa.mp3'},
+      {title: 'Surah Ar Rahman', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/055 Ar Rahman.mp3'},
+      {title: 'Penuh Berkah', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/Penuh Berkah.mp3'},
+      {title: 'Surah Yusuf', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/012 Yusuf.mp3'},
+      {title: 'Ramadhan Cuan', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/Ramadhan Cuan.mp3'},
+      {title: 'Surah An Nisa', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/004 An Nisa.mp3'},
     ];
     let currentIndex = 0;
     let hasAutoPlayed = false;
@@ -3944,7 +3944,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(fallbackShow, 400);
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/sw.js').catch(() => {
+      navigator.serviceWorker.register('https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/sw.js').catch(() => {
       });
     });
   }

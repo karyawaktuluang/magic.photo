@@ -38,7 +38,7 @@
   try {
     if (typeof Howl !== 'undefined') {
       newChatSound = new Howl({
-        src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@b1af49376aa57ea3c63f809b8377ff681512d335/assets/newchat.mp3'],
+        src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@a14c6c/assets/newchat.mp3'],
         volume: 1,
         preload: true
       });
