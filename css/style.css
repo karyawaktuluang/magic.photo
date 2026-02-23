@@ -86,7 +86,6 @@ body.ramadhan-bg::before {
     opacity: 0.9;
     z-index: -3;
     pointer-events: none;
-    animation: ramadhan-ambient 20s ease-in-out infinite;
 }
 
 /* Sky container */
@@ -98,55 +97,126 @@ body.ramadhan-bg::before {
     overflow: hidden;
 }
 
+/* Modern Sidebar Toggle Button */
 .ramadhan-sidebar-toggle {
-    background: linear-gradient(180deg, rgba(255, 252, 245, 0.98), rgba(248, 236, 210, 0.96));
-    border-color: rgba(218, 165, 32, 0.35);
-    box-shadow: 4px 0 20px rgba(218, 165, 32, 0.2);
-    position: relative;
+    background: rgba(15, 23, 42, 0.85); /* Matches --bg-dark / --sidebar-bg base */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: none;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25),
+    inset -1px 0 2px rgba(255, 255, 255, 0.1);
+    position: fixed;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 14px 14px 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
     overflow: hidden;
+    padding: 18px 4px;
 }
 
-.ramadhan-sidebar-toggle::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 6px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    box-shadow: inset -4px 1px 0 1px rgba(246, 216, 138, 0.95);
-    opacity: 0.9;
-    pointer-events: none;
+.ramadhan-sidebar-toggle:hover {
+    background: rgba(30, 41, 59, 0.95); /* Matches slate-800 */
+    box-shadow: 6px 0 28px rgba(0, 0, 0, 0.3),
+    inset -1px 0 2px rgba(255, 255, 255, 0.15);
+    transform: translate(var(--tw-translate-x, 0), var(--tw-translate-y, -50%));
 }
 
+.ramadhan-sidebar-toggle:active {
+    transform: translate(var(--tw-translate-x, 0), var(--tw-translate-y, -50%)) scale(0.95);
+}
+
+.ramadhan-sidebar-toggle::before,
 .ramadhan-sidebar-toggle::after {
-    content: '';
-    position: absolute;
-    bottom: 12px;
-    left: 9px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(218, 165, 32, 0.45);
-    box-shadow: 0 0 8px rgba(218, 165, 32, 0.35);
-    pointer-events: none;
+    display: none;
 }
 
 .ramadhan-toggle-bar {
-    background: rgba(218, 165, 32, 0.5);
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .ramadhan-sidebar-toggle:hover .ramadhan-toggle-bar {
-    background: rgba(218, 165, 32, 0.75);
+    background: #2dd4bf; /* Teal-400 */
+    box-shadow: 0 0 8px rgba(45, 212, 191, 0.5);
 }
 
 .ramadhan-toggle-icon {
-    color: rgba(146, 99, 25, 0.7);
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
 }
 
 .ramadhan-sidebar-toggle:hover .ramadhan-toggle-icon {
-    color: rgba(176, 120, 32, 0.9);
+    color: #2dd4bf; /* Teal 400 */
+    filter: drop-shadow(0 0 5px rgba(45, 212, 191, 0.4));
+    transform: scale(1.1);
 }
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    display: inline-block;
+    background: transparent;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    text-shadow: none;
+    animation: none;
+    vertical-align: middle;
+}
+
+.spinner::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background-image: url('https://sulapfoto.com/sflogo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+}
+
+.spinner::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #2dd4bf;
+    border-right-color: #0d9488;
+    animation: spin 0.8s linear infinite;
+    z-index: 2;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* user hemat gerakan */
+@media (prefers-reduced-motion: reduce) {
+    .spinner {
+        animation: none;
+    }
+}
+
+/* default: pause dulu, nanti JS yang aktifkan saat terlihat */
+.spinner.paused {
+    animation-play-state: paused;
+}
+
 
 /* Stars Layer */
 .ramadhan-stars {
@@ -183,7 +253,6 @@ body.ramadhan-bg::before {
     68vw 52vh 0 2px rgba(218, 165, 32, 0.24),
     84vw 58vh 0 3px rgba(218, 165, 32, 0.2);
     border-radius: 50%;
-    animation: ramadhan-twinkle 3s ease-in-out infinite alternate;
 }
 
 /* Smaller twinkling stars */
@@ -205,7 +274,6 @@ body.ramadhan-bg::before {
     90vw 36vh 0 1.5px rgba(218, 165, 32, 0.22),
     96vw 22vh 0 1px rgba(218, 165, 32, 0.18);
     border-radius: 50%;
-    animation: ramadhan-twinkle 4.5s ease-in-out infinite alternate-reverse;
 }
 
 /* Crescent Moon */
@@ -218,7 +286,6 @@ body.ramadhan-bg::before {
     border-radius: 50%;
     background: transparent;
     box-shadow: inset -20px 2px 0 2px #f6d88a;
-    animation: ramadhan-moon-float 8s ease-in-out infinite;
 }
 
 /* Moon inner glow */
@@ -235,7 +302,6 @@ body.ramadhan-bg::before {
     font-size: 18px;
     color: rgba(218, 165, 32, 0.45);
     text-shadow: 0 0 8px rgba(218, 165, 32, 0.35);
-    animation: ramadhan-star-spin 6s linear infinite;
 }
 
 /* Mosque Silhouette */
@@ -267,7 +333,6 @@ body.ramadhan-bg::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Ccircle cx='36' cy='40' r='4' fill='rgba(218,165,32,0.16)'/%3E%3Ccircle cx='160' cy='96' r='5' fill='rgba(218,165,32,0.14)'/%3E%3Ccircle cx='248' cy='56' r='3.5' fill='rgba(218,165,32,0.15)'/%3E%3Ccircle cx='90' cy='220' r='4' fill='rgba(218,165,32,0.14)'/%3E%3Ccircle cx='230' cy='250' r='5' fill='rgba(218,165,32,0.15)'/%3E%3C/svg%3E");
     background-size: 320px 320px;
     background-repeat: repeat;
-    animation: ramadhan-square-fall 30s linear infinite;
     opacity: 0.22;
     filter: blur(0.2px);
 }
@@ -289,170 +354,6 @@ body.ramadhan-bg::before {
     animation: ramadhan-falling-stars 25s linear infinite;
     opacity: 0.7;
 } */
-
-/* ========= Ramadhan Animations ========= */
-@keyframes ramadhan-ambient {
-
-    0%,
-    100% {
-        opacity: 0.8;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
-
-@keyframes ramadhan-sparkle-drift {
-    0% {
-        opacity: 0.5;
-    }
-
-    50% {
-        opacity: 0.8;
-    }
-
-    100% {
-        opacity: 0.5;
-    }
-}
-
-@keyframes ramadhan-twinkle {
-    0% {
-        opacity: 0.3;
-    }
-
-    50% {
-        opacity: 0.8;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes ramadhan-moon-float {
-
-    0%,
-    100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-
-    25% {
-        transform: translateY(-8px) rotate(1deg);
-    }
-
-    50% {
-        transform: translateY(5px) rotate(-1deg);
-    }
-
-    75% {
-        transform: translateY(-3px) rotate(0.5deg);
-    }
-}
-
-@keyframes ramadhan-moon-pulse {
-
-    0%,
-    100% {
-        opacity: 0.6;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.1);
-    }
-}
-
-@keyframes ramadhan-star-spin {
-    0% {
-        transform: rotate(0deg) scale(1);
-        opacity: 0.7;
-    }
-
-    25% {
-        transform: rotate(90deg) scale(1.2);
-        opacity: 1;
-    }
-
-    50% {
-        transform: rotate(180deg) scale(1);
-        opacity: 0.7;
-    }
-
-    75% {
-        transform: rotate(270deg) scale(1.2);
-        opacity: 1;
-    }
-
-    100% {
-        transform: rotate(360deg) scale(1);
-        opacity: 0.7;
-    }
-}
-
-@keyframes ramadhan-lantern-sway {
-
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-    }
-
-    30% {
-        transform: translateY(calc(var(--lantern-float, 10px) * -1)) rotate(1deg);
-        opacity: 0.85;
-    }
-
-    70% {
-        transform: translateY(calc(var(--lantern-float, 10px) * 0.6)) rotate(-1deg);
-        opacity: 0.95;
-    }
-
-    85% {
-        transform: translateY(calc(var(--lantern-float, 10px) * -0.4)) rotate(0.6deg);
-        opacity: 0.9;
-    }
-}
-
-@keyframes ramadhan-falling-stars {
-    0% {
-        transform: translateY(0);
-        opacity: 0.6;
-    }
-
-    50% {
-        opacity: 0.8;
-    }
-
-    100% {
-        transform: translateY(50%);
-        opacity: 0.6;
-    }
-}
-
-@keyframes ramadhan-float {
-
-    0%,
-    100% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(12px);
-    }
-}
-
-@keyframes ramadhan-square-fall {
-    0% {
-        transform: translateY(-10%);
-    }
-
-    100% {
-        transform: translateY(10%);
-    }
-}
 
 /* ========= Responsive Ramadhan ========= */
 @media (max-width: 640px) {
@@ -561,7 +462,7 @@ aside nav::-webkit-scrollbar-thumb:hover {
 }
 
 .server-toast {
-    background: rgba(15, 23, 42, 0.3);
+    background: rgba(15, 23, 42, 0.9);
     color: #f8fafc;
     padding: 4px 8px;
     border-radius: 6px;
@@ -743,61 +644,33 @@ aside nav::-webkit-scrollbar-thumb:hover {
     animation: fadeOut 0.3s ease-in forwards;
 }
 
-@keyframes pan-gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
 .animated-title {
     background-image: linear-gradient(to right, var(--accent-text), var(--accent), var(--accent-text));
     background-size: 200% auto;
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
-    animation: pan-gradient 5s linear infinite;
-}
-
-@keyframes sparkle {
-
-    0%,
-    100% {
-        transform: scale(1) rotate(-12deg);
-    }
-
-    50% {
-        transform: scale(1.1) rotate(-10deg);
-    }
 }
 
 .animated-wand-icon {
-    animation: sparkle 3s ease-in-out infinite;
     transition: transform 0.3s ease;
 }
 
 .animated-wand-icon:hover {
-    transform: scale(1.2) rotate(5deg) !important;
+    transform: scale(1.2) rotate(5deg);
 }
 
 .loader-icon,
 .lucide-loader-2,
 [data-lucide="loader-2"] {
-    display: none !important;
+    display: none;
 }
 
 .loader-icon {
-    display: none !important;
-    width: 1rem;
-    height: 1rem;
-    background-image: url('https://cdn.jsdelivr.net/gh/karyawaktuluang/magic.photo@main/assets/magicphoto.png');
+    display: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url('https://sulapfoto.com/sflogo.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -884,7 +757,7 @@ aside nav::-webkit-scrollbar-thumb:hover {
     transform: translate(-50%, -50%);
     width: 24px;
     height: 24px;
-    background-image: url('https://cdn.jsdelivr.net/gh/karyawaktuluang/magic.photo@main/assets/magicphoto.png');
+    background-image: url('https://sulapfoto.com/sflogo.png');
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0.9;
@@ -936,7 +809,6 @@ aside nav::-webkit-scrollbar-thumb:hover {
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
-    animation: pan-gradient 3s linear infinite;
     font-weight: 700;
     letter-spacing: 0.5px;
     margin-top: 1.5rem;
@@ -1336,31 +1208,16 @@ select:focus {
 
 .option-btn.selected i,
 .checkbox-btn.selected i {
-    color: white !important;
-    opacity: 1 !important;
+    color: white;
+    opacity: 1;
 }
 
 .option-btn.selected span,
 .checkbox-btn.selected span {
-    color: white !important;
-}
-
-@keyframes shimmer {
-    0% {
-        transform: translateX(-150%);
-    }
-
-    50% {
-        transform: translateX(150%);
-    }
-
-    100% {
-        transform: translateX(150%);
-    }
+    color: white;
 }
 
 .animate-shimmer {
-    animation: shimmer 2s infinite;
 }
 
 .validation-status {
@@ -1817,6 +1674,12 @@ aside nav::-webkit-scrollbar-corner {
     display: flex;
 }
 
+.beranda-tab-wrapper.beranda-tab-attached {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: 0;
+}
+
 .beranda-dual-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -1836,6 +1699,20 @@ aside nav::-webkit-scrollbar-corner {
     background: linear-gradient(160deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.96) 100%);
     box-shadow: 0 20px 45px -30px rgba(15, 23, 42, 0.45);
     overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+    .assistant-card-modern.beranda-card-attached,
+    .group-chat-card-modern.beranda-card-attached {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .beranda-card-attached .assistant-header,
+    .beranda-card-attached .group-chat-header {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
 }
 
 .assistant-header,
@@ -1884,6 +1761,38 @@ aside nav::-webkit-scrollbar-corner {
     box-shadow: 0 10px 20px -12px rgba(20, 184, 166, 0.7);
 }
 
+.boost-toggle-tooltip {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    transform: translateY(-8px);
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 6px 8px;
+    border-radius: 8px;
+    white-space: nowrap;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.boost-toggle-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 10px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #0f172a transparent transparent transparent;
+}
+
+.boost-toggle-tooltip.active {
+    opacity: 1;
+}
+
 .vto-tab-btn.active,
 .mg-tab-btn.active,
 .sf-tab-btn.active,
@@ -1900,44 +1809,10 @@ aside nav::-webkit-scrollbar-corner {
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
-@keyframes equalize {
-    0% {
-        transform: scaleY(0.1);
-    }
-
-    25% {
-        transform: scaleY(1.0);
-    }
-
-    50% {
-        transform: scaleY(0.3);
-    }
-
-    75% {
-        transform: scaleY(0.75);
-    }
-
-    100% {
-        transform: scaleY(0.1);
-    }
-}
-
 #equalizer-icon .eq-bar {
     transform-origin: bottom;
     transition: transform 0.2s ease-out;
     transform: scaleY(0.1);
-}
-
-#equalizer-icon.playing .eq-bar {
-    animation: equalize 1.2s infinite ease-in-out;
-}
-
-#equalizer-icon.playing .eq-bar:nth-child(2) {
-    animation-delay: -0.2s;
-}
-
-#equalizer-icon.playing .eq-bar:nth-child(3) {
-    animation-delay: -0.4s;
 }
 
 .group-chat-bubble {
@@ -2187,7 +2062,7 @@ aside nav::-webkit-scrollbar-corner {
 }
 
 #group-chat-name-entry.hidden {
-    display: none !important;
+    display: none;
 }
 
 #group-chat-card {
@@ -2196,7 +2071,7 @@ aside nav::-webkit-scrollbar-corner {
 
 @media (min-width: 1024px) {
     .beranda-tab-wrapper {
-        display: none !important;
+        display: none;
     }
 
     .beranda-dual-grid {
@@ -2282,7 +2157,6 @@ aside nav::-webkit-scrollbar-corner {
     font-weight: 600;
     color: white;
     box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
-    animation: pulse-online 2s infinite;
 }
 
 .online-indicator .online-dot {
@@ -2290,7 +2164,6 @@ aside nav::-webkit-scrollbar-corner {
     height: 6px;
     background-color: #fff;
     border-radius: 50%;
-    animation: blink-dot 1.5s infinite;
 }
 
 @keyframes pulse-online {
@@ -2553,7 +2426,6 @@ aside nav::-webkit-scrollbar-corner {
     height: 6px;
     background: white;
     border-radius: 50%;
-    animation: blink-dot 1.5s infinite;
 }
 
 
@@ -2744,7 +2616,6 @@ aside nav::-webkit-scrollbar-corner {
     border-radius: 50%;
     flex-shrink: 0;
     box-shadow: 0 0 0 3px #d1fae5;
-    animation: pulse-online 2s infinite;
 }
 
 .reply-quote-user {
@@ -3140,23 +3011,8 @@ aside nav::-webkit-scrollbar-corner {
     background: radial-gradient(circle at 30% 30%, #fde68a, #f59e0b);
     color: #78350f;
     box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6);
-    animation: vipPulse 1.8s infinite;
     font-weight: 800;
     font-size: 0.85rem;
-}
-
-@keyframes vipPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.55);
-    }
-
-    70% {
-        box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
-    }
-
-    100% {
-        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
-    }
 }
 
 .upgrade-vip-list {
@@ -3210,17 +3066,18 @@ aside nav::-webkit-scrollbar-corner {
 
 .ramadhan-music-player {
     width: 100%;
-    padding: 8px 10px;
+    padding: 12px 14px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
     touch-action: none;
-    margin-bottom: 8px;
+    margin-bottom: 0;
+    height: 100%;
+    justify-content: center;
 }
 
 .rmp-header {
@@ -3246,8 +3103,8 @@ aside nav::-webkit-scrollbar-corner {
 
 .rmp-track-title {
     font-weight: 700;
-    font-size: 0.7rem;
-    color: #f8fafc;
+    font-size: 0.85rem;
+    color: #1e293b;
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
@@ -3256,13 +3113,15 @@ aside nav::-webkit-scrollbar-corner {
 }
 
 .rmp-track-subtitle {
-    font-size: 0.6rem;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.7rem;
+    color: #64748b;
     letter-spacing: 0.3px;
+    font-weight: 500;
 }
 
 .rmp-controls {
     display: flex;
+    align-items: center;
     gap: 8px;
 }
 
@@ -3274,16 +3133,17 @@ aside nav::-webkit-scrollbar-corner {
     gap: 4px;
     padding: 5px 8px;
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: #475569;
     transition: all 0.2s ease;
 }
 
 .rmp-btn:hover {
     transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    background: #f1f5f9;
+    color: #0f172a;
+    border-color: #cbd5e1;
 }
 
 .rmp-btn:active {
@@ -3304,7 +3164,7 @@ aside nav::-webkit-scrollbar-corner {
 .rmp-volume-icon {
     width: 14px;
     height: 14px;
-    color: rgba(255, 255, 255, 0.6);
+    color: #94a3b8;
 }
 
 .rmp-volume input[type="range"] {
@@ -3313,7 +3173,7 @@ aside nav::-webkit-scrollbar-corner {
     width: 100%;
     height: 4px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.2);
+    background: #e2e8f0;
     outline: none;
 }
 
@@ -3323,9 +3183,9 @@ aside nav::-webkit-scrollbar-corner {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #fff;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background: #0d9488;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
@@ -3333,9 +3193,9 @@ aside nav::-webkit-scrollbar-corner {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #fff;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background: #0d9488;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
@@ -3352,13 +3212,151 @@ aside nav::-webkit-scrollbar-corner {
 
     .ramadhan-music-player .rmp-title {
         display: flex;
+        width: 100%;
     }
 
     .ramadhan-music-player .rmp-header {
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .ramadhan-music-player .rmp-controls {
+        width: 100%;
+    }
+
+    .ramadhan-music-player .rmp-volume {
+        flex: 1;
     }
 
     .ramadhan-music-player:not(.minimized) {
         min-width: unset;
+    }
+}
+
+
+/* ============================== */
+/* MODERN SPLASH SCREEN           */
+/* ============================== */
+.splash-screen {
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+}
+
+.splash-logo-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1.5rem;
+}
+
+.splash-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(20, 184, 166, 0.2));
+}
+
+.splash-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #2dd4bf;
+    border-right-color: #0d9488; /* Gradient effect simulation */
+    opacity: 0;
+    animation: splash-spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.splash-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #0f172a, #0d9488);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* Fallback color */
+    text-fill-color: transparent;
+}
+
+.splash-subtitle {
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.splash-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-left: 2px;
+}
+
+.splash-dots span {
+    width: 4px;
+    height: 4px;
+    background-color: #2dd4bf;
+    border-radius: 50%;
+    display: inline-block;
+    animation: splash-bounce 1.4s infinite ease-in-out both;
+}
+
+.splash-dots span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.splash-dots span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes splash-pulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(20, 184, 166, 0.2));
+    }
+    50% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 25px rgba(20, 184, 166, 0.4));
+    }
+}
+
+@keyframes splash-spin {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes splash-bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
     }
 }
