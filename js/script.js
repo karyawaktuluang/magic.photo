@@ -19,19 +19,36 @@ window.JSON.parse = function (text, reviver) {
   }
 }
 
-function replaceBranding(oldText, newText) {
+function replaceBrandingName(oldText, newText) {
+  console.log('Rebranding name loaded')
   const walker = document.createTreeWalker(
     document.body,
     NodeFilter.SHOW_TEXT,
     null,
-    false
+    false,
   );
   let node;
   while (node = walker.nextNode()) {
     if (node.nodeValue.includes(oldText)) {
-      node.nodeValue = node.nodeValue.replaceAll(oldText, newText);
+      node.nodeValue = node.nodeValue.replace(
+        new RegExp(oldText, 'gi'),
+        newText,
+      );
     }
   }
+}
+
+function replaceBrandingAssets(oldAsset, newAssets) {
+  console.log('Rebranding assets loaded')
+  const attributes = ['src', 'href', 'poster', 'data-src'];
+  document.querySelectorAll('*').forEach(element => {
+    attributes.forEach(attribute => {
+      const value = element.getAttribute(attribute);
+      if (value && !value.endsWith('.js') && value.includes(oldAsset)) {
+        element.setAttribute(attribute, value.replaceAll(oldAsset, newAssets));
+      }
+    });
+  });
 }
 
 document.querySelectorAll('button.sidebar-btn').forEach(button => {
@@ -39,15 +56,25 @@ document.querySelectorAll('button.sidebar-btn').forEach(button => {
     localStorage.setItem('sulapfoto_last_menu', e.currentTarget.id);
   });
 });
-document.addEventListener('DOMContentLoaded', () => {
-  setInterval(() => {
-    replaceBranding('Sulap Foto', window.APP_NAME);
-  }, 1000)
+
+function onReady(fn) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fn);
+  } else {
+    fn();
+  }
+}
+
+onReady(() => {
+  replaceBrandingName('Sulap Foto', window.APP_NAME);
+  replaceBrandingAssets('https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@main/assets/sflogo.png', 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Sign-check-icon.png');
+  replaceBrandingAssets('https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@main/', window.CDN);
   setTimeout(() => {
     const button = document.querySelector('button.sidebar-btn#' + (localStorage.getItem('sulapfoto_last_menu') ?? 'tab-beranda'));
     button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
-  }, 3000);
+  }, 1000 * 10);
 });
+
 let API_KEY = window.API_KEY || "";
 const MODE_ENDPOINT = (window.MODE_ENDPOINT || "BACKEND").toUpperCase();
 const USE_FRONTEND_ENDPOINT = MODE_ENDPOINT === "FRONTEND" || MODE_ENDPOINT === "FRONTED";
@@ -276,13 +303,13 @@ if (window.MODE_ENDPOINT === 'GEMINI' && typeof window.fetch === 'function') {
         });
       };
       console.log(init, body)
-      if (url.includes('generate')) {
+      if (url.includes('generate') || url.includes('nanobananapro')) {
         const parts = [{text: body.instruction ?? body.prompt}];
         for (const image of Array.isArray(body.images ?? []) ? body.images ?? [] : [body.images,]) {
           parts.push({inlineData: {mimeType: image.type, data: await fileToBase64(image)}});
         }
 
-        function nearestStandardRatio(ratioStr) {
+        function nearestStandardRatio(ratioString) {
           const standards = [
             '1:1',
             '4:3',
@@ -292,17 +319,17 @@ if (window.MODE_ENDPOINT === 'GEMINI' && typeof window.fetch === 'function') {
             '3:2',
             '2:3',
           ];
-          const [w, h] = ratioStr.split(":").map(Number);
-          const target = w / h;
+          const [width, height] = ratioString.split(':').map(Number);
+          const target = width / height;
           let closest = standards[0];
-          let minDiff = Infinity;
-          for (const r of standards) {
-            const [sw, sh] = r.split(":").map(Number);
-            const sr = sw / sh;
-            const diff = Math.abs(sr - target);
-            if (diff < minDiff) {
-              minDiff = diff;
-              closest = r;
+          let minDifference = Infinity;
+          for (const standard of standards) {
+            const [standardWidth, standardHeight] = standard.split(':').map(Number);
+            const standardFinal = standardWidth / standardHeight;
+            const difference = Math.abs(standardFinal - target);
+            if (difference < minDifference) {
+              minDifference = difference;
+              closest = standard;
             }
           }
           return closest;
@@ -1700,7 +1727,7 @@ Trimakasih`
   };
   const provinceList = ["Aceh", "Bali", "Banten", "Bengkulu", "DI Yogyakarta", "DKI Jakarta", "Gorontalo", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kep. Bangka Belitung", "Kep. Riau", "Lampung", "Maluku", "Maluku Utara", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat", "Sumatera Selatan", "Sumatera Utara"];
   const chatSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/chat.mp3'],
+    src: [CDN + 'assets/chat.mp3'],
     volume: 1,
     preload: true
   });
@@ -1782,7 +1809,7 @@ Trimakasih`
     }
   });
   const backgroundMusic = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/music.mp3'],
+    src: [CDN + 'assets/music.mp3'],
     volume: 1,
     loop: true,
     html5: true,
@@ -1819,22 +1846,22 @@ Trimakasih`
   }
   Howler.html5PoolSize = 50;
   const hoverSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/hover.mp3'],
+    src: [CDN + 'assets/hover.mp3'],
     volume: 0.6,
     preload: true
   });
   const clickSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/click.mp3'],
+    src: [CDN + 'assets/click.mp3'],
     volume: 1,
     preload: true
   });
   const doneSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/done.mp3'],
+    src: [CDN + 'assets/done.mp3'],
     volume: 1,
     preload: true
   });
   const errorSound = new Howl({
-    src: ['https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/error.mp3'],
+    src: [CDN + 'assets/error.mp3'],
     volume: 1,
     preload: true
   });
@@ -3248,7 +3275,7 @@ Trimakasih`
   const footerTextEl = document.getElementById('footer-text');
   if (footerTextEl) {
     const appVariant = document.body?.dataset?.app;
-    const logoImg = '<img src="https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/sflogo.png" class="w-3 h-3 inline-block mr-1 align-middle" alt="Logo">';
+    const logoImg = `<img src="${window.APP_LOGO}" class="w-3 h-3 inline-block mr-1 align-middle" alt="Logo">`;
     if (appVariant === 'vip') {
       footerTextEl.innerHTML = `${logoImg} 2026. Sulap Foto 5.0 <span class="inline-flex items-center gap-1 bg-gradient-to-tr from-amber-400 to-yellow-200 text-amber-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.35)] tracking-wider border border-yellow-400/30 align-middle">VIP</span> By It's Me`;
     } else {
@@ -3265,11 +3292,11 @@ Trimakasih`
     const rmpVolume = document.getElementById('rmp-volume');
     const rmpToggle = document.getElementById('rmp-toggle');
     const tracks = [
-      {title: 'Surah Ar Rahman', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/055 Ar Rahman.mp3'},
-      {title: 'Penuh Berkah', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/Penuh Berkah.mp3'},
-      {title: 'Surah Yusuf', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/012 Yusuf.mp3'},
-      {title: 'Ramadhan Cuan', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/Ramadhan Cuan.mp3'},
-      {title: 'Surah An Nisa', src: 'https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/004 An Nisa.mp3'},
+      {title: 'Surah Ar Rahman', src: CDN + 'assets/055 Ar Rahman.mp3'},
+      {title: 'Penuh Berkah', src: CDN + 'assets/Penuh Berkah.mp3'},
+      {title: 'Surah Yusuf', src: CDN + 'assets/012 Yusuf.mp3'},
+      {title: 'Ramadhan Cuan', src: CDN + 'assets/Ramadhan Cuan.mp3'},
+      {title: 'Surah An Nisa', src: CDN + 'assets/004 An Nisa.mp3'},
     ];
     let currentIndex = 0;
     let hasAutoPlayed = false;
@@ -3946,7 +3973,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(fallbackShow, 400);
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('https://cdn.jsdelivr.net/gh/syifarahmat/sulap.foto@e3544e/assets/sw.js').catch(() => {
+      navigator.serviceWorker.register(CDN + 'assets/sw.js').catch(() => {
       });
     });
   }
