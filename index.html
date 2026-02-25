@@ -11,8 +11,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Sulap Foto">
-    <link rel="preconnect" href="https://api.sulapfoto.com">
-    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
@@ -22,10 +20,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Pacifico&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/karyawaktuluang/magic.photo@main/css/style.css?v=1771857326">
     <style>
         /*
@@ -484,8 +483,11 @@
                     <!-- Music Player -->
                     <div id="ramadhan-music-player" class="ramadhan-music-player !mt-0 !mb-0 h-full">
                         <audio id="ramadhan-audio" preload="metadata">
-                            <source src="/assets/Sulap Foto - Penuh Berkah.mp3" type="audio/mpeg">
-                            <source src="/assets/Sulap Foto - Ramadhan Cuan.mp3" type="audio/mpeg">
+                            <source src="https://cdn.jsdelivr.net/gh/karyawaktuluang/magic.photo@main/assets/055 Ar Rahman.mp3" type="audio/mpeg">
+                            <source src="https://cdn.jsdelivr.net/gh/karyawaktuluang/magic.photo@main/assets/Penuh Berkah.mp3" type="audio/mpeg">
+                            <source src="https://cdn.jsdelivr.net/gh/karyawaktuluang/magic.photo@main/assets/012 Yusuf.mp3" type="audio/mpeg">
+                            <source src="https://cdn.jsdelivr.net/gh/karyawaktuluang/magic.photo@main/assets/Ramadhan Cuan.mp3" type="audio/mpeg">
+                            <source src="https://cdn.jsdelivr.net/gh/karyawaktuluang/magic.photo@main/assets/004 An Nisa.mp3" type="audio/mpeg">
                         </audio>
                         <div class="rmp-header">
                             <div class="rmp-title">
@@ -7402,7 +7404,7 @@
             return true;
         }
     }
-    window.CDN = window.inGemini() ? 'https://cdn.jsdelivr.net/gh/karyawaktuluang/magic.photo@a501dab200aa0c053be90f44c3424311d9ab8265/' : '';
+    window.CDN = window.inGemini() ? 'https://cdn.jsdelivr.net/gh/karyawaktuluang/magic.photo@e7a18cd73e3f56ef72aa22c35d3ec261779d3d1e/' : '';
     Promise.all([
         `${CDN}js/chat-group.js?v=1771857327`,
         `${CDN}js/gabung-foto.js?v=1771857327`,
